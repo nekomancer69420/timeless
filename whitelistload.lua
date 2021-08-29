@@ -33,6 +33,9 @@ game.PlaceId == 5188367351 then
 elseif
 game.PlaceId == 2788229376 then
    loadstring(game:HttpGet("loadstringhttps://raw.githubusercontent.com/nekomancer69420/timeless/main/dahoodobftime.lua", true))()
+elseif
+gmae.PlaceId == 6490016198 then
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/nekomancer69420/timeless/main/slayertyccoonreal.lua", true))()
 else
    loadstring(game:HttpGet("https://raw.githubusercontent.com/nekomancer69420/nekosarecute/main/tps.lua", true))()
 end
