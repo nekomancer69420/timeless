@@ -35,8 +35,8 @@ local FindFirstChild = Instancenew("Part").FindFirstChild
 
 -- // Silent Aim Vars
 getgenv().ValiantAimHacks = {
-    SilentAimEnabled = true,
-    ShowFOV = true,
+    SilentAimEnabled = false,
+    ShowFOV = false,
     FOVSides = 12,
     VisibleCheck = true,
     TeamCheck = true,
