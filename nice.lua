@@ -52,7 +52,7 @@ getgenv().ValiantAimHacks = {
         },
     },
     BlacklistedPlayers = {LocalPlayer},
-    WhitelistedPUIDs = {91318356},
+    WhitelistedPUIDs = {},
 }
 local ValiantAimHacks = getgenv().ValiantAimHacks
 
