@@ -365,7 +365,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
     ValiantAimHacks.Selected = ClosestPlayer
     ValiantAimHacks.SelectedPart = TargetPart
 end
-end
+
 
 -- // Heartbeat Function
 Heartbeat:Connect(function()
