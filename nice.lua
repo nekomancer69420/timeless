@@ -1,4 +1,4 @@
-
+-- // New version: See ./Aiming/SilentAim.lua
 
 if getgenv().ValiantAimHacks then return getgenv().ValiantAimHacks end
 
@@ -35,10 +35,10 @@ local FindFirstChild = Instancenew("Part").FindFirstChild
 
 -- // Silent Aim Vars
 getgenv().ValiantAimHacks = {
-    SilentAimEnabled = false,
-    ShowFOV = false,
-    FOVSides = 100,
-    VisibleCheck = true,
+    SilentAimEnabled = true,
+    ShowFOV = true,
+    FOVSides = 12,
+    VisibleCheck = false,
     TeamCheck = true,
     FOV = 60,
     HitChance = 100,
@@ -52,7 +52,7 @@ getgenv().ValiantAimHacks = {
         },
     },
     BlacklistedPlayers = {LocalPlayer},
-    WhitelistedPUIDs = {},
+    WhitelistedPUIDs = {91318356},
 }
 local ValiantAimHacks = getgenv().ValiantAimHacks
 
@@ -60,7 +60,7 @@ local ValiantAimHacks = getgenv().ValiantAimHacks
 local circle = Drawingnew("Circle")
 circle.Transparency = 1
 circle.Thickness = 2
-circle.Color = Color3fromRGB(0, 0, 0)
+circle.Color = Color3fromRGB(231, 84, 128)
 circle.Filled = false
 function ValiantAimHacks.updateCircle()
     if (circle) then
@@ -371,3 +371,4 @@ Heartbeat:Connect(function()
 end)
 
 return ValiantAimHacks
+
