@@ -358,7 +358,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if Obscuring == false then continue end
+                    if Obscuring == false then
 
                     -- //
                     ClosestPlayer = Player
@@ -372,6 +372,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
     -- // End
     ValiantAimHacks.Selected = ClosestPlayer
     ValiantAimHacks.SelectedPart = TargetPart
+end
 end
 
 -- // Heartbeat Function
