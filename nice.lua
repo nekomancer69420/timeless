@@ -9,7 +9,7 @@ local GuiService = game:GetService("GuiService")
 local RunService = game:GetService("RunService")
 
 -- // Vars
-local Camera = game:GetService("Workspace"):FindFirstChildOfClass("Camera")
+
 local Heartbeat = RunService.Heartbeat
 local LocalPlayer = Players.LocalPlayer
 local CurrentCamera = Workspace.CurrentCamera
@@ -316,7 +316,7 @@ function ValiantAimHacks.getClosestTargetPartToCursor(Character)
     -- //
     return ClosestPart, ClosestPartPosition, ClosestPartOnScreen, ClosestPartMagnitudeFromMouse
 end
-local VisibilityCheck = true
+
 -- // Silent Aim Function
 function ValiantAimHacks.getClosestPlayerToCursor()
     -- // Vars
@@ -345,20 +345,12 @@ function ValiantAimHacks.getClosestPlayerToCursor()
             if (TargetPartTemp and ValiantAimHacks.checkHealth(Player)) then
                 -- // Team Check
                 if (ValiantAimHacks.TeamCheck and not ValiantAimHacks.checkTeam(Player, LocalPlayer)) then continue end
-				local Obscuring = false
-                if VisibilityCheck == true then
-        			local Parts = Camera:GetPartsObscuringTarget({game.Players.LocalPlayer.Character.Head.Position, TargetPartTemp.Position}, {Camera, game.Players.LocalPlayer.Character})
-                	for i2, v2 in pairs(Parts) do
-                    	if v2:IsDescendantOf(v.Character) == false and v2.Transparency == 0 then
-                        	Obscuring = true
-                    	end
-                	end
-                end
+				
+
 
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if Obscuring == false then
 
                     -- //
                     ClosestPlayer = Player
