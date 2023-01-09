@@ -14,7 +14,7 @@ local Heartbeat = RunService.Heartbeat
 local LocalPlayer = Players.LocalPlayer
 local CurrentCamera = Workspace.CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
-local Camera = game:GetService("Workspace"):FindFirstChildOfClass("Camera")
+
 -- // Optimisation Vars (ugly)
 local Drawingnew = Drawing.new
 local Color3fromRGB = Color3.fromRGB
@@ -41,7 +41,7 @@ getgenv().ValiantAimHacks = {
     FOVSides = 12,
     VisibleCheck = true,
     TeamCheck = true,
-    FOV = 20,
+    FOV = 18,
     HitChance = 100,
     Selected = LocalPlayer,
     SelectedPart = nil,
@@ -53,7 +53,7 @@ getgenv().ValiantAimHacks = {
         },
     },
     BlacklistedPlayers = {LocalPlayer},
-    WhitelistedPUIDs = {91318356},
+    WhitelistedPUIDs = {},
 }
 local ValiantAimHacks = getgenv().ValiantAimHacks
 
@@ -89,27 +89,16 @@ function ValiantAimHacks.isPartVisible(Part, PartDescendant)
     local Character = LocalPlayer.Character or CharacterAddedWait(CharacterAdded)
     local Origin = CurrentCamera.CFrame.Position
     local _, OnScreen = WorldToViewportPoint(CurrentCamera, Part.Position)
-    if game:GetService("Workspace"):FindFirstChildOfClass("Camera") then
-        local Camera = game:GetService("Workspace"):FindFirstChildOfClass("Camera")
-    end
+
     -- // If Part is on the screen
     if (OnScreen) then
-        -- // Vars: Calculating if is visible
-        local Obscuring = false
-        local Parts = Camera:GetPartsObscuringTarget({Character.Head.Position, Part.Position}, {Camera, Character})
-        for i2, v2 in pairs(Parts) do
-        if v2:IsDescendantOf(v.Character) == false and v2.Transparency == 0 then
-                Obscuring = true
-            end
-        end
-    end
-if Obscuring == false then
-            local PartHit = Part
-            local Visible = true
+        local PartHit = Part
+        local Visible = (not PartHit or IsDescendantOf(PartHit, PartDescendant))
 
             -- // Return
-            return Visible
-        end
+        return Visible
+    end
+
     -- // Return
     return false
 end
@@ -354,7 +343,7 @@ function ValiantAimHacks.getClosestPlayerToCursor()
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if (ValiantAimHacks.VisibleCheck and not ValiantAimHacks.isPartVisible(TargetPartTemp, Character)) then continue end
+
                     -- //
                     ClosestPlayer = Player
                     ShortestDistance = Magnitude
