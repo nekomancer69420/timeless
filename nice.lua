@@ -102,15 +102,14 @@ function ValiantAimHacks.isPartVisible(Part, PartDescendant)
                 Obscuring = true
             end
         end
-        if Obscuring == false then
+    end
+if Obscuring == false then
             local PartHit = Part
             local Visible = true
 
             -- // Return
             return Visible
         end
-    end
-
     -- // Return
     return false
 end
