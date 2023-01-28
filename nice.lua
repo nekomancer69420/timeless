@@ -9,7 +9,6 @@ local GuiService = game:GetService("GuiService")
 local RunService = game:GetService("RunService")
 
 -- // Vars
-
 local Heartbeat = RunService.Heartbeat
 local LocalPlayer = Players.LocalPlayer
 local CurrentCamera = Workspace.CurrentCamera
@@ -38,14 +37,14 @@ local FindFirstChild = Instancenew("Part").FindFirstChild
 getgenv().ValiantAimHacks = {
     SilentAimEnabled = true,
     ShowFOV = true,
-    FOVSides = 12,
+    FOVSides = 16,
     VisibleCheck = true,
     TeamCheck = true,
-    FOV = 30,
+    FOV = 25,
     HitChance = 100,
     Selected = LocalPlayer,
     SelectedPart = nil,
-    TargetPart = {"Head"},
+    TargetPart = {"Head", "HumanoidRootPart"},
     BlacklistedTeams = {
         {
             Team = LocalPlayer.Team,
@@ -92,11 +91,19 @@ function ValiantAimHacks.isPartVisible(Part, PartDescendant)
 
     -- // If Part is on the screen
     if (OnScreen) then
-        local PartHit = Part
-        local Visible = (not PartHit or IsDescendantOf(PartHit, PartDescendant))
+        -- // Vars: Calculating if is visible
+        local raycastParams = RaycastParamsnew()
+        raycastParams.FilterType = EnumRaycastFilterTypeBlacklist
+        raycastParams.FilterDescendantsInstances = {Character, CurrentCamera}
+
+        local Result = Raycast(Workspace, Origin, Part.Position - Origin, raycastParams)
+        if (Result) then
+            local PartHit = Result.Instance
+            local Visible = (not PartHit or IsDescendantOf(PartHit, PartDescendant))
 
             -- // Return
-        return Visible
+            return Visible
+        end
     end
 
     -- // Return
@@ -337,12 +344,11 @@ function ValiantAimHacks.getClosestPlayerToCursor()
             if (TargetPartTemp and ValiantAimHacks.checkHealth(Player)) then
                 -- // Team Check
                 if (ValiantAimHacks.TeamCheck and not ValiantAimHacks.checkTeam(Player, LocalPlayer)) then continue end
-				
-
 
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
+                    if (ValiantAimHacks.VisibleCheck and not ValiantAimHacks.isPartVisible(TargetPartTemp, Character)) then continue end
 
                     -- //
                     ClosestPlayer = Player
@@ -358,7 +364,6 @@ function ValiantAimHacks.getClosestPlayerToCursor()
     ValiantAimHacks.SelectedPart = TargetPart
 end
 
-
 -- // Heartbeat Function
 Heartbeat:Connect(function()
     ValiantAimHacks.updateCircle()
@@ -366,3 +371,4 @@ Heartbeat:Connect(function()
 end)
 
 return ValiantAimHacks
+
